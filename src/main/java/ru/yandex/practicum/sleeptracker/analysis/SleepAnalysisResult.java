@@ -1,10 +1,10 @@
 package ru.yandex.practicum.sleeptracker.analysis;
 
 public class SleepAnalysisResult {
-    final int value;
+    final Object value;
     final String description;
 
-    public SleepAnalysisResult(int value, String description) {
+    public SleepAnalysisResult(Object value, String description) {
         this.value = value;
         this.description = description;
     }

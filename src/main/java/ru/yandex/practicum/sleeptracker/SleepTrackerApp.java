@@ -19,6 +19,7 @@ public class SleepTrackerApp {
         analysisProcessors.add(new Avg());
         analysisProcessors.add(new CountBAD());
         analysisProcessors.add(new CountSleepless());
+        analysisProcessors.add(new Status());
 
 
 
