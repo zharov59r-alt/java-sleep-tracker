@@ -11,7 +11,7 @@ public class CountBAD implements Function<List<SleepingSession>, SleepAnalysisRe
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> o) {
         return new SleepAnalysisResult(
-                (int) o.stream()
+                o.stream()
                         .filter(session -> session.status.equals("BAD"))
                         .count()
                 , "Количество сессий с плохим качество сна");
