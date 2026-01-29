@@ -13,8 +13,8 @@ public class CountBAD implements Function<List<SleepingSession>, SleepAnalysisRe
         return new SleepAnalysisResult(
                 o.stream()
                         .filter(session -> session.status.equals("BAD"))
-                        .count()
-                , "Количество сессий с плохим качество сна");
+                        .count(),
+                "Количество сессий с плохим качество сна");
     }
 
 }

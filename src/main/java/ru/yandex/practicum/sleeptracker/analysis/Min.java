@@ -14,8 +14,8 @@ public class Min implements Function<List<SleepingSession>, SleepAnalysisResult>
                 o.stream()
                         .map(session -> (int) Duration.between(session.begin, session.end).toMinutes())
                         .min(Long::compare)
-                        .get()
-                , "Минимальная продолжительность сессии (в минутах)");
+                        .get(),
+                "Минимальная продолжительность сессии (в минутах)");
     }
 
 }

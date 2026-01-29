@@ -14,8 +14,8 @@ public class Max implements Function<List<SleepingSession>, SleepAnalysisResult>
                 o.stream()
                         .map(session -> (int) Duration.between(session.begin, session.end).toMinutes())
                         .max(Long::compare)
-                        .get()
-                , "Максимальная продолжительность сессии (в минутах)");
+                        .get(),
+                "Максимальная продолжительность сессии (в минутах)");
     }
 
 }
