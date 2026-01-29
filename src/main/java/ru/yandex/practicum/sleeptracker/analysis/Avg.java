@@ -16,8 +16,8 @@ public class Avg implements Function<List<SleepingSession>, SleepAnalysisResult>
                         .map(session -> (int) Duration.between(session.begin, session.end).toMinutes())
                         .mapToInt(i -> i)
                         .average().orElse(0.0)
-                    )
-                , "Средняя продолжительность сессии (в минутах)");
+                    ),
+                "Средняя продолжительность сессии (в минутах)");
     }
 
 }
