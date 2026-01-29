@@ -1,6 +1,7 @@
 package ru.yandex.practicum.sleeptracker.analysis;
 
 import ru.yandex.practicum.sleeptracker.SleepingSession;
+import ru.yandex.practicum.sleeptracker.enums.Chronotype;
 
 import java.time.*;
 import java.util.AbstractMap;
@@ -28,7 +29,7 @@ public class Status implements Function<List<SleepingSession>, SleepAnalysisResu
             Сова: begin > 23:00 && end > 9:00
             Жаворонок: begin < 22:00 && end < 7:00
         */
-        Function<SleepingSession, String> sessionMapper = (SleepingSession session) -> {
+        Function<SleepingSession, Chronotype> sessionMapper = (SleepingSession session) -> {
             if (session.begin.isAfter(
                     LocalDateTime.of(
                         session.end.toLocalDate().minusDays(1),
@@ -36,7 +37,7 @@ public class Status implements Function<List<SleepingSession>, SleepAnalysisResu
                 ) &&  session.end.isAfter(
                     LocalDateTime.of(session.end.toLocalDate(), LocalTime.of(9, 0, 0)))
                 ) {
-                return "сова";
+                return Chronotype.OWL;
             } else if (session.begin.isBefore(
                 LocalDateTime.of(
                     session.end.toLocalDate().minusDays(1),
@@ -44,14 +45,14 @@ public class Status implements Function<List<SleepingSession>, SleepAnalysisResu
                 ) && session.end.isBefore(
                         LocalDateTime.of(session.end.toLocalDate(), LocalTime.of(7, 0, 0)))
                 ) {
-                return "жаворонок";
+                return Chronotype.LARK;
             } else {
-                return "голубь";
+                return Chronotype.PIGEON;
             }
         };
 
 
-        List<String> status = o.stream()
+        List<Chronotype> status = o.stream()
             .filter(sessionFilter)
             .map(sessionMapper)
              // Группируем данные в мапу вычисляя количество для каждого статуса
@@ -68,10 +69,10 @@ public class Status implements Function<List<SleepingSession>, SleepAnalysisResu
             .entrySet()
             .stream()
             .max(Map.Entry.comparingByKey())
-            .orElseGet(() -> new AbstractMap.SimpleEntry<>(1L, List.of("голубь")))
+            .orElseGet(() -> new AbstractMap.SimpleEntry<>(1L, List.of(Chronotype.PIGEON)))
             .getValue();
 
-        return new SleepAnalysisResult((status.size() > 1) ? "голубь" : status.getFirst(), "Вы");
+        return new SleepAnalysisResult((status.size() > 1) ? Chronotype.PIGEON : status.getFirst(), "Вы");
     }
 
 }

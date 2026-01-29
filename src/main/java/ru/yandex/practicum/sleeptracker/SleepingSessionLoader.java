@@ -1,5 +1,7 @@
 package ru.yandex.practicum.sleeptracker;
 
+import ru.yandex.practicum.sleeptracker.enums.SleepQuality;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -45,7 +47,7 @@ public class SleepingSessionLoader {
         return new SleepingSession(
                 LocalDateTime.parse(args[0], FORMATTER),
                 LocalDateTime.parse(args[1], FORMATTER),
-                args[2]
+                SleepQuality.valueOf(args[2])
         );
 
     }
