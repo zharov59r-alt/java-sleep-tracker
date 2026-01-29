@@ -12,6 +12,8 @@ import java.util.stream.IntStream;
 
 public class CountSleepless implements Function<List<SleepingSession>, SleepAnalysisResult> {
 
+
+
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> o) {
 
@@ -20,7 +22,6 @@ public class CountSleepless implements Function<List<SleepingSession>, SleepAnal
         LocalDate startPeriod = firstSessionBegin.toLocalTime().isAfter(LocalTime.of(12, 0, 0)) ?
                 firstSessionBegin.toLocalDate().plusDays(1L) : firstSessionBegin.toLocalDate();
 
-        System.out.println(startPeriod);
         System.out.println(o.getLast().end.toLocalDate().plusDays(1L));
 
         Period daysBetween = Period.between(
@@ -30,17 +31,14 @@ public class CountSleepless implements Function<List<SleepingSession>, SleepAnal
         System.out.println(daysBetween.getDays());
 
         return new SleepAnalysisResult(
-            IntStream.rangeClosed(0, daysBetween.getDays())
-                .filter(num ->
-                    o.stream()
-                        .anyMatch(
-                            session ->
-                                session.begin.isBefore(firstSessionBegin.plusDays(num).plusHours(7L)) &&
-                                session.end.isAfter(firstSessionBegin.plusDays(num))
-                        )
-                )
-                .count(),
-            "Количество бессонных ночей");
+                (int) IntStream.rangeClosed(0, daysBetween.getDays())
+                        .filter(num -> {
+
+                            return num > 0;
+                        })
+                        .peek(System.out::println)
+                        .count(),
+                "Количество бессонных ночей");
     }
 
 }

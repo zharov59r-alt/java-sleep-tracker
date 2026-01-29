@@ -11,7 +11,7 @@ public class Avg implements Function<List<SleepingSession>, SleepAnalysisResult>
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> o) {
         return new SleepAnalysisResult(
-                Math.round(
+                (int) Math.round(
                     o.stream()
                         .map(session -> (int) Duration.between(session.begin, session.end).toMinutes())
                         .mapToInt(i -> i)
