@@ -2,6 +2,8 @@ package ru.yandex.practicum.sleeptracker;
 
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.analysis.*;
+import ru.yandex.practicum.sleeptracker.enums.Chronotype;
+import ru.yandex.practicum.sleeptracker.enums.SleepQuality;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,11 +19,11 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 6, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 8, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Avg func = new Avg();
         assertEquals(420L, func.apply(sessions).value);
@@ -33,7 +35,7 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 9, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Count func = new Count();
         assertEquals(1, func.apply(sessions).value);
@@ -45,11 +47,11 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 6, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 8, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Max func = new Max();
         assertEquals(480, func.apply(sessions).value);
@@ -61,11 +63,11 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 6, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 8, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Min func = new Min();
         assertEquals(360, func.apply(sessions).value);
@@ -77,18 +79,18 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 6, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 8, 0),
-                "BAD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 0, 0),
                 LocalDateTime.of(2026, 1, 1, 8, 0),
-                "BAD"));
+                SleepQuality.BAD));
 
         CountBAD func = new CountBAD();
-        assertEquals(2L, func.apply(sessions).value);
+        assertEquals(1L, func.apply(sessions).value);
     }
 
     @Test
@@ -97,11 +99,11 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 2, 23, 0),
                 LocalDateTime.of(2026, 1, 3, 5, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 23, 0),
                 LocalDateTime.of(2026, 1, 4, 5, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         CountSleepless func = new CountSleepless();
         assertEquals(0L, func.apply(sessions).value);
@@ -113,11 +115,11 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 2, 23, 0),
                 LocalDateTime.of(2026, 1, 3, 8, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 23, 0),
                 LocalDateTime.of(2026, 1, 4, 8, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         CountSleepless func = new CountSleepless();
         assertEquals(0L, func.apply(sessions).value);
@@ -131,11 +133,11 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 1, 0),
                 LocalDateTime.of(2026, 1, 3, 5, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 4, 1, 0),
                 LocalDateTime.of(2026, 1, 4, 5, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         CountSleepless func = new CountSleepless();
         assertEquals(0L, func.apply(sessions).value);
@@ -147,11 +149,11 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 1, 0),
                 LocalDateTime.of(2026, 1, 3, 8, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 1, 0),
                 LocalDateTime.of(2026, 1, 4, 8, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         CountSleepless func = new CountSleepless();
         assertEquals(0L, func.apply(sessions).value);
@@ -163,7 +165,7 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 15, 0),
                 LocalDateTime.of(2026, 1, 3, 18, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         CountSleepless func = new CountSleepless();
         assertEquals(1L, func.apply(sessions).value);
@@ -175,7 +177,7 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 7, 0),
                 LocalDateTime.of(2026, 1, 3, 11, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         CountSleepless func = new CountSleepless();
         assertEquals(1L, func.apply(sessions).value);
@@ -187,11 +189,11 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 1, 0),
                 LocalDateTime.of(2026, 1, 3, 8, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 5, 1, 0),
                 LocalDateTime.of(2026, 1, 5, 8, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         CountSleepless func = new CountSleepless();
         assertEquals(1L, func.apply(sessions).value);
@@ -203,10 +205,10 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 0, 0),
                 LocalDateTime.of(2026, 1, 3, 10, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Status func = new Status();
-        assertEquals("сова", func.apply(sessions).value);
+        assertEquals(Chronotype.OWL, func.apply(sessions).value);
     }
 
     @Test
@@ -215,10 +217,10 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 2, 21, 0),
                 LocalDateTime.of(2026, 1, 3, 6, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Status func = new Status();
-        assertEquals("жаворонок", func.apply(sessions).value);
+        assertEquals(Chronotype.LARK, func.apply(sessions).value);
     }
 
     @Test
@@ -227,10 +229,10 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 2, 21, 0),
                 LocalDateTime.of(2026, 1, 3, 10, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Status func = new Status();
-        assertEquals("голубь", func.apply(sessions).value);
+        assertEquals(Chronotype.PIGEON, func.apply(sessions).value);
     }
 
     @Test
@@ -239,14 +241,14 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 0, 0),
                 LocalDateTime.of(2026, 1, 3, 10, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 21, 0),
                 LocalDateTime.of(2026, 1, 4, 6, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Status func = new Status();
-        assertEquals("голубь", func.apply(sessions).value);
+        assertEquals(Chronotype.PIGEON, func.apply(sessions).value);
     }
 
     @Test
@@ -255,18 +257,18 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 0, 0),
                 LocalDateTime.of(2026, 1, 3, 10, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 4, 0, 0),
                 LocalDateTime.of(2026, 1, 4, 10, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 4, 21, 0),
                 LocalDateTime.of(2026, 1, 5, 6, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Status func = new Status();
-        assertEquals("сова", func.apply(sessions).value);
+        assertEquals(Chronotype.OWL, func.apply(sessions).value);
     }
 
     @Test
@@ -275,10 +277,10 @@ public class SleepTrackerAppTest {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 7, 0),
                 LocalDateTime.of(2026, 1, 3, 11, 0),
-                "GOOD"));
+                SleepQuality.GOOD));
 
         Status func = new Status();
-        assertEquals("голубь", func.apply(sessions).value);
+        assertEquals(Chronotype.PIGEON, func.apply(sessions).value);
     }
 
 }
